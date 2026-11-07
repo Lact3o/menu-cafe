@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<nav th:fragment="menu" class="menu">
+	    <span class="logo">☕ Mi Café</span>
+	    <a th:href="@{/catalogo}">Catálogo</a>
+	    <a th:href="@{/carrito}">Carrito</a>
+	    <a th:href="@{/pedidos}">Pedidos</a>
+	    <a th:href="@{/productos}">Productos</a>
+
+	    <span th:if="${usuarioActual}" th:text="${usuarioActual}"></span>
+	    <form th:if="${usuarioActual}" th:action="@{/logout}" method="post" style="display:inline">
+	        <button class="boton secundario" type="submit">Salir</button>
+	    </form>
+	    <a th:unless="${usuarioActual}" th:href="@{/login}">Iniciar sesión</a>
+	    <a th:unless="${usuarioActual}" th:href="@{/registro}">Registrarse</a>
+	</nav>
+
+    <div th:fragment="mensajes">
+        <p class="alerta ok" th:if="${mensaje}" th:text="${mensaje}"></p>
+        <p class="alerta error" th:if="${error}" th:text="${error}"></p>
+    </div>
+</body>
+</html>

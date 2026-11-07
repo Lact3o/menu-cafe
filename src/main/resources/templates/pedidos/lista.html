@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <nav th:replace="~{fragments/menu :: menu}"></nav>
+    <main>
+        <div th:replace="~{fragments/menu :: mensajes}"></div>
+        <h1>Pedidos</h1>
+        <table>
+            <thead>
+                <tr><th>N°</th><th>Fecha</th><th>Cliente</th><th>Productos</th><th>Total</th><th>Estado</th></tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${pedidos}">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${#temporals.format(p.fecha, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${p.cliente.nombre}"></td>
+                    <td>
+                        <span th:each="d, st : ${p.detalles}"
+                              th:text="${d.cantidad} + ' x ' + ${d.producto.nombre} + (${st.last} ? '' : ', ')"></span>
+                    </td>
+                    <td th:text="'$' + ${#numbers.formatDecimal(p.total, 1, 2)}"></td>
+                    <td th:text="${p.estado}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <nav th:replace="~{fragments/menu :: menu}"></nav>
+    <main>
+        <div th:replace="~{fragments/menu :: mensajes}"></div>
+        <h1>Tu carrito</h1>
+
+        <p th:if="${items.isEmpty()}">El carrito está vacío. <a th:href="@{/catalogo}">Ir al catálogo</a></p>
+
+        <div th:unless="${items.isEmpty()}">
+            <table>
+                <thead>
+                    <tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th><th></th></tr>
+                </thead>
+                <tbody>
+                    <tr th:each="i : ${items}">
+                        <td th:text="${i.producto.nombre}"></td>
+                        <td th:text="'$' + ${#numbers.formatDecimal(i.precioUnitario, 1, 2)}"></td>
+                        <td th:text="${i.cantidad}"></td>
+                        <td th:text="'$' + ${#numbers.formatDecimal(i.subtotal, 1, 2)}"></td>
+                        <td>
+                            <form th:action="@{/carrito/quitar/{id}(id=${i.producto.id})}" method="post">
+                                <button class="boton peligro" type="submit">Quitar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Total: <span th:text="'$' + ${#numbers.formatDecimal(total, 1, 2)}"></span></h3>
+            <a class="boton" th:href="@{/carrito/checkout}">Confirmar pedido</a>
+        </div>
+    </main>
+</body>
+</html>

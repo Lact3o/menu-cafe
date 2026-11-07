@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <nav th:replace="~{fragments/menu :: menu}"></nav>
+
+    <main>
+		<div th:replace="~{fragments/menu :: mensajes}"></div>
+        <h1>Productos</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th><th>Tipo</th><th>Categoría</th>
+                    <th>Precio</th><th>Disponible</th><th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${productos}">
+                    <td th:text="${p.nombre}"></td>
+                    <td th:text="${p.class.simpleName}"></td>
+                    <td th:text="${p.categoria != null ? p.categoria.nombre : '-'}"></td>
+                    <td th:text="'$' + ${p.calcularPrecio()}"></td>
+                    <td th:text="${p.disponible ? 'Sí' : 'No'}"></td>
+                    <td>
+                        <a class="boton" th:href="@{/productos/editar/{id}(id=${p.id})}">Editar</a>
+                        <form th:action="@{/productos/eliminar/{id}(id=${p.id})}" method="post" style="display:inline">
+                            <button class="boton peligro" type="submit"
+                                    onclick="return confirm('¿Eliminar este producto?')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar pedido</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <nav th:replace="~{fragments/menu :: menu}"></nav>
+    <main>
+        <h1>Confirmar pedido</h1>
+
+        <ul>
+            <li th:each="i : ${items}"
+                th:text="${i.cantidad} + ' x ' + ${i.producto.nombre} + ' — $' + ${#numbers.formatDecimal(i.subtotal, 1, 2)}"></li>
+        </ul>
+        <h3>Total: <span th:text="'$' + ${#numbers.formatDecimal(total, 1, 2)}"></span></h3>
+
+        <form th:action="@{/carrito/confirmar}" th:object="${clienteForm}" method="post">
+            <label>Nombre</label>
+            <input type="text" th:field="*{nombre}">
+            <small class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+
+            <label>Email</label>
+            <input type="text" th:field="*{email}">
+            <small class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+
+            <label>Teléfono</label>
+            <input type="text" th:field="*{telefono}">
+            <small class="error" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
+
+            <button class="boton" type="submit">Hacer pedido</button>
+            <a class="boton secundario" th:href="@{/carrito}">Volver</a>
+        </form>
+    </main>
+</body>
+</html>

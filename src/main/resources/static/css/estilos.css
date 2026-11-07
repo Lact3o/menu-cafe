@@ -1,0 +1,21 @@
+body { font-family: Arial, sans-serif; margin: 0; background: #faf5ef; color: #3b2a20; }
+.menu { background: #6f4e37; padding: 14px 24px; display: flex; gap: 20px; align-items: center; }
+.menu a { color: #fff; text-decoration: none; }
+.menu a:hover { text-decoration: underline; }
+.menu .logo { font-weight: bold; font-size: 1.2em; margin-right: auto; color: #fff; }
+main { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+table { width: 100%; border-collapse: collapse; background: #fff; }
+th, td { padding: 10px; border-bottom: 1px solid #e6d9cc; text-align: left; }
+th { background: #e6d9cc; }
+form label { display: block; margin-top: 12px; }
+form input[type=text], form input[type=number], form select { width: 100%; padding: 8px; box-sizing: border-box; }
+.boton { background: #6f4e37; color: #fff; border: none; padding: 8px 14px; border-radius: 4px; text-decoration: none; cursor: pointer; display: inline-block; margin-top: 12px; }
+.boton.peligro { background: #a33; }
+.boton.secundario { background: #999; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.tarjeta { background: #fff; border: 1px solid #e6d9cc; border-radius: 6px; padding: 14px; }
+.precio { font-weight: bold; color: #6f4e37; }
+.alerta { padding: 10px; border-radius: 4px; }
+.alerta.ok { background: #dff0d8; }
+.alerta.error { background: #f2dede; }
+small.error { color: #a33; }

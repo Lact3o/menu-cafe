@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <nav th:replace="~{fragments/menu :: menu}"></nav>
+    <main>
+        <h1 th:text="${titulo}">Error</h1>
+        <p th:text="${detalle}"></p>
+        <a class="boton" th:href="@{/catalogo}">Volver al catálogo</a>
+    </main>
+</body>
+</html>

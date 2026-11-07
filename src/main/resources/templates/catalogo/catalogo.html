@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <nav th:replace="~{fragments/menu :: menu}"></nav>
+
+    <main>
+        <div th:replace="~{fragments/menu :: mensajes}"></div>
+
+        <h1>Catálogo</h1>
+
+        <div class="grid">
+            <div class="tarjeta" th:each="p : ${productos}">
+                <h3 th:text="${p.nombre}"></h3>
+                <p th:text="${p.descripcion}"></p>
+                <p class="precio" th:text="'$' + ${#numbers.formatDecimal(p.calcularPrecio(), 1, 2)}"></p>
+
+                <form th:action="@{/carrito/agregar/{id}(id=${p.id})}" method="post">
+                    <input type="number" name="cantidad" value="1" min="1" max="20">
+                    <button class="boton" type="submit">Agregar</button>
+                </form>
+
+                <a th:href="@{/producto/{id}(id=${p.id})}">Ver reseñas</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
